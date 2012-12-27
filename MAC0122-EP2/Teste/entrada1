@@ -1,0 +1,16 @@
+# ARQUIVO DE ENTRADA QUE DEFINE UM MONDRIAN A SER PINTADO
+#
+# Uma linha com comentario deve comecar com o caractere '#'
+#
+# Todo arquivo deve comecar com a definicao da
+# dimensao da imagem: altura (numero de linhas) x largura (colunas)
+R 100 200
+
+# o resto do arquivo define as linhas, que podem ser verticais ou
+#  horizontais. Cada linha comecao com o tipo, V ou H, seguida da
+# posicao da linha ou coluna na imagem, o inicio e o fim.
+# cada linha Ã© desenha do inicio ate o ponto == ao fim.
+# consideramos inicio <= fim
+
+V 20 0 99
+H 20 0 199
