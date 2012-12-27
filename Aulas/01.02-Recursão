@@ -1,0 +1,8 @@
+RECURSÃO
+
+A resolução recursiva tem tipicamente a seguinte estrutura:
+	SE    se a instância em questão é "pequena" resolva diretamente
+	SENÃO 
+		  reduza-a a uma instância menor "do mesmo problema". Apli-
+		  que o método à instância menor e volte à instÇancia origi-
+		  nal.
