@@ -146,12 +146,12 @@ void desenhaLinha(Imagem *img, Linha * lin, float cor);
 void desenhaBorda(Imagem *img, float cor);
 
 int  juntaPixels(Imagem *img, int x, int y, 
-		 float corNova, CelPixel *cabeca);
+         float corNova, CelPixel *cabeca);
 
 int  segmentaRegioes(Imagem *img, CelRegiao cabecas[MAX_REGIOES]);
 
 void pintaRegiao(CelPixel *cab, Imagem *R, Imagem *G, Imagem *B, 
-		 float cor[3]);
+         float cor[3]);
 
 
 
@@ -164,82 +164,82 @@ void pintaRegiao(CelPixel *cab, Imagem *R, Imagem *G, Imagem *B,
 
 int main(int argc, char** argv)
 {
-  	/** ALOCAÇÃO DE VARIÁVEIS ****************************************/
-		Imagem *img;		/*	Estrutura que guarda imagem genérica */
-		int altura;			/* 	Dimensao da estrutura imagem 		 */
-		int largura;		/* 	Dimensão da estrutura imagem 		 */
-		Linha cab;			/* 	Lista com comando para criar linhas	 */
-		Linha *atual;		/* 	Ponteiro auxiliar para fazer linhas	 */
-		Imagem *R, *G, *B;	/* 	Canais de cores para imagem			 */
-		int totalElementos;	/* 	Auxiliar para nº de regiões	achadas	 */
-		int i;				/*	Contador 							 */
-		CelRegiao cabecas[MAX_REGIOES];
-			/* 	Vetor para cabeças das regiões de pixel	da imagem	 */
-		float cores[12][3]=
-			/*	Matriz para cores a serem colocadas nos canais 		 */
-		{
- 			{1.0, 0.0, 0.0}, /*  0 vermelho	*/
- 		 	{0.0, 1.0, 0.0}, /*  1 verde   	*/
-			{0.0, 0.0, 1.0}, /*  2 azul    	*/
-			{1.0, 1.0, 0.0}, /*  3 amarelo 	*/
-			{1.0, 0.0, 1.0}, /*  4 magenta 	*/
-			{0.0, 0.0, 0.0}, /*  5 preto   	*/
-			{0.2, 0.7, 0.4}, /*  6 verde 2 	*/
-			{0.7, 0.4, 0.2}, /*  7 marrom  	*/
-			{0.0, 1.0, 1.0}, /*  8 ciano   	*/
-			{0.5, 0.5, 0.5}, /*  9 cinza   	*/
-			{1.0, 1.0, 1.0}, /* 10 branco  	*/
-			{0.0, 0.0, 0.0}  /* 11 preto   	*/
-		};
-	
-	
-  	/** LEITURA DE ARQUIVO DE ENTRADA ********************************/
-		cab.prox = NULL;
-		leMondrian(argv[1], &altura, &largura, &cab);	
-	
-	
-	/** FUNDO E BORDAS ***********************************************/	
-		img = criaImagem(altura, largura);
-		pintaImagem(img, COR_FUNDO);
-		desenhaBorda(img, COR_BORDA);
-	
-		
-	/** DESENHO DE LINHAS ********************************************/
-		for(atual = cab.prox; atual != NULL; atual = atual->prox)
-			desenhaLinha(img, atual, COR_BORDA);
-	
-	
-	/** SEGMENTAÇÃO DE REGIÕES ***************************************/
-		totalElementos = segmentaRegioes(img, cabecas);
-		
-	
-	/** CRIAÇÃO DOS CANAIS DE CORES **********************************/
-		R = criaImagem(altura, largura); 
-		copiaImagem(R, img);				/* Vermelho */
+    /** ALOCAÇÃO DE VARIÁVEIS ****************************************/
+        Imagem *img;        /*  Estrutura que guarda imagem genérica */
+        int altura;         /*  Dimensao da estrutura imagem         */
+        int largura;        /*  Dimensão da estrutura imagem         */
+        Linha cab;          /*  Lista com comando para criar linhas  */
+        Linha *atual;       /*  Ponteiro auxiliar para fazer linhas  */
+        Imagem *R, *G, *B;  /*  Canais de cores para imagem          */
+        int totalElementos; /*  Auxiliar para nº de regiões achadas  */
+        int i;              /*  Contador                             */
+        CelRegiao cabecas[MAX_REGIOES];
+            /*  Vetor para cabeças das regiões de pixel da imagem    */
+        float cores[12][3]=
+            /*  Matriz para cores a serem colocadas nos canais       */
+        {
+            {1.0, 0.0, 0.0}, /*  0 vermelho */
+            {0.0, 1.0, 0.0}, /*  1 verde    */
+            {0.0, 0.0, 1.0}, /*  2 azul     */
+            {1.0, 1.0, 0.0}, /*  3 amarelo  */
+            {1.0, 0.0, 1.0}, /*  4 magenta  */
+            {0.0, 0.0, 0.0}, /*  5 preto    */
+            {0.2, 0.7, 0.4}, /*  6 verde 2  */
+            {0.7, 0.4, 0.2}, /*  7 marrom   */
+            {0.0, 1.0, 1.0}, /*  8 ciano    */
+            {0.5, 0.5, 0.5}, /*  9 cinza    */
+            {1.0, 1.0, 1.0}, /* 10 branco   */
+            {0.0, 0.0, 0.0}  /* 11 preto    */
+        };
+    
+    
+    /** LEITURA DE ARQUIVO DE ENTRADA ********************************/
+        cab.prox = NULL;
+        leMondrian(argv[1], &altura, &largura, &cab);   
+    
+    
+    /** FUNDO E BORDAS ***********************************************/ 
+        img = criaImagem(altura, largura);
+        pintaImagem(img, COR_FUNDO);
+        desenhaBorda(img, COR_BORDA);
+    
+        
+    /** DESENHO DE LINHAS ********************************************/
+        for(atual = cab.prox; atual != NULL; atual = atual->prox)
+            desenhaLinha(img, atual, COR_BORDA);
+    
+    
+    /** SEGMENTAÇÃO DE REGIÕES ***************************************/
+        totalElementos = segmentaRegioes(img, cabecas);
+        
+    
+    /** CRIAÇÃO DOS CANAIS DE CORES **********************************/
+        R = criaImagem(altura, largura); 
+        copiaImagem(R, img);                /* Vermelho */
 
-		G = criaImagem(altura, largura); 
-		copiaImagem(G, img);				/* Verde */
-	
-		B = criaImagem(altura, largura); 
-		copiaImagem(B, img);				/* Azul */
-	
-	
-	/** PINTURA ******************************************************/
-		for(i = 0; i < totalElementos; i++)
-			pintaRegiao(&cabecas[i].cabpix, R, G, B, cores[i%12]);
-		
-		
-	/** SALVAR IMAGEM ************************************************/
-		salvaImagemRGB(argv[2], R, G, B);
-		
-		
-	/** LIBERAÇÃO DE MEMÓRIA *****************************************/
-		free(img);
-		free(R);
-		free(G);
-		free(B);
-	
-	return 0;
+        G = criaImagem(altura, largura); 
+        copiaImagem(G, img);                /* Verde */
+    
+        B = criaImagem(altura, largura); 
+        copiaImagem(B, img);                /* Azul */
+    
+    
+    /** PINTURA ******************************************************/
+        for(i = 0; i < totalElementos; i++)
+            pintaRegiao(&cabecas[i].cabpix, R, G, B, cores[i%12]);
+        
+        
+    /** SALVAR IMAGEM ************************************************/
+        salvaImagemRGB(argv[2], R, G, B);
+        
+        
+    /** LIBERAÇÃO DE MEMÓRIA *****************************************/
+        free(img);
+        free(R);
+        free(G);
+        free(B);
+    
+    return 0;
 }
 
 /* 
@@ -249,209 +249,209 @@ int main(int argc, char** argv)
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 */
 float getPixel(Imagem *img, int x, int y)
-	/* 	A função recebe o endereço de uma imagem e uma coordenada (x,y);
-		Retorna o valor daquele pixel */
+    /*  A função recebe o endereço de uma imagem e uma coordenada (x,y);
+        Retorna o valor daquele pixel */
 {
-	return img->pixel[x][y];
+    return img->pixel[x][y];
 }
 
 
 void  setPixel(Imagem *img, int x, int y, float cor)
-	/* 	A função recebe o endereço de uma imagem e coloca um valor na 
-		posição (x,y) da matriz bidimensional que compõe a imagem */
+    /*  A função recebe o endereço de uma imagem e coloca um valor na 
+        posição (x,y) da matriz bidimensional que compõe a imagem */
 {
-	img->pixel[x][y] = cor;
+    img->pixel[x][y] = cor;
 }
 
 
 void  pintaImagem(Imagem *img, float cor)
-	/*	A função recebe como parâmetro o endereço de uma imagem e colo-
-		ca em todos os pixels dela uma cor (representado por um número 
-		float), */
+    /*  A função recebe como parâmetro o endereço de uma imagem e colo-
+        ca em todos os pixels dela uma cor (representado por um número 
+        float), */
 {
-	int i,j;
-	
-	for(i = 0; i < img->nL; i++) {
-		for(j = 0; j < img->nC; j++) {
-			setPixel(img, i, j, cor);
-		}
-	}
+    int i,j;
+    
+    for(i = 0; i < img->nL; i++) {
+        for(j = 0; j < img->nC; j++) {
+            setPixel(img, i, j, cor);
+        }
+    }
 }
 
 
 void  copiaImagem (Imagem *destino, Imagem *origem)
-	/*	A função recebe o endereço de uma imagem e devolve uma cópia de-
-		la, armazenada num endereço previamente alocado e recebido por
-		meio do parâmetro *origem. */
+    /*  A função recebe o endereço de uma imagem e devolve uma cópia de-
+        la, armazenada num endereço previamente alocado e recebido por
+        meio do parâmetro *origem. */
 {
-	int i, j; float pixelAtual;
-	destino->nL = origem->nL;
-	destino->nC = origem->nC;
-	
-	for(i = 0; i < origem->nL; i++) {
-		for(j = 0; j < origem->nC; j++)
-		{
-			pixelAtual = getPixel(origem, i, j);
-			setPixel(destino, i, j, pixelAtual);
-		}
-	}
+    int i, j; float pixelAtual;
+    destino->nL = origem->nL;
+    destino->nC = origem->nC;
+    
+    for(i = 0; i < origem->nL; i++) {
+        for(j = 0; j < origem->nC; j++)
+        {
+            pixelAtual = getPixel(origem, i, j);
+            setPixel(destino, i, j, pixelAtual);
+        }
+    }
 }
 
 
 Imagem *criaImagem(int nLins, int nCols)
-	/*	A função recebe o número de linhas e de colunas e cria uma estru-
-		tura do tipo 'Imagem', na qual será criada uma matriz de tamanho
-		nLins x nCols */
+    /*  A função recebe o número de linhas e de colunas e cria uma estru-
+        tura do tipo 'Imagem', na qual será criada uma matriz de tamanho
+        nLins x nCols */
 {
-	 /** ALOCAÇÃO DE VARIÁVEIS ****************************************/
-		int i;				/* Variável auxiliar 	*/
-		Imagem *novaImagem;	/* Imagem a ser alocada */
-		novaImagem = mallocSafe(sizeof(Imagem));
-			/* 	Alocamos com malloc para a variável não ser descartada
-				com o fim da função */
+     /** ALOCAÇÃO DE VARIÁVEIS ****************************************/
+        int i;              /* Variável auxiliar    */
+        Imagem *novaImagem; /* Imagem a ser alocada */
+        novaImagem = mallocSafe(sizeof(Imagem));
+            /*  Alocamos com malloc para a variável não ser descartada
+                com o fim da função */
 
-	 /** CRIAÇÃO DA IMAGEM ********************************************/
-		novaImagem->nL = nLins;
-		novaImagem->nC = nCols;
-		
-		/* Alocando a matriz 'pixel' na estrutura novaImagem */
-		novaImagem->pixel = mallocSafe(nLins * sizeof(int *));
-		for(i = 0; i < nLins; i++)
-			novaImagem->pixel[i] = mallocSafe(nCols * sizeof(int));
-		
-	 /** RETORNO ******************************************************/
-		return novaImagem;
+     /** CRIAÇÃO DA IMAGEM ********************************************/
+        novaImagem->nL = nLins;
+        novaImagem->nC = nCols;
+        
+        /* Alocando a matriz 'pixel' na estrutura novaImagem */
+        novaImagem->pixel = mallocSafe(nLins * sizeof(int *));
+        for(i = 0; i < nLins; i++)
+            novaImagem->pixel[i] = mallocSafe(nCols * sizeof(int));
+        
+     /** RETORNO ******************************************************/
+        return novaImagem;
 }
 
 
 void desenhaLinha(Imagem *img, Linha * lin, float cor)
-	/*	A função recebe uma imagem e uma estrutura de linha. Desenha a 
-		linha com a cor passada como parâmetro na matriz da imagem. */
+    /*  A função recebe uma imagem e uma estrutura de linha. Desenha a 
+        linha com a cor passada como parâmetro na matriz da imagem. */
 {
-	int var;
-	int posicao_fixa = lin->pos;
-	int ini = lin->ini;
-	int fim = lin->fim;
-	
-	switch(lin->tipo) {
-		case 'h':
-		case TIPO_HORIZONTAL:
-			for(var = ini; var < fim; var++)
-				setPixel(img, posicao_fixa, var, cor);
-			break;
-		case 'v':
-		case TIPO_VERTICAL:
-			for(var = ini; var < fim; var++)
-				setPixel(img, var, posicao_fixa, cor);
-			break;
-		default:
-			printf("Erro na leitura!");
-			break;
-	}
+    int var;
+    int posicao_fixa = lin->pos;
+    int ini = lin->ini;
+    int fim = lin->fim;
+    
+    switch(lin->tipo) {
+        case 'h':
+        case TIPO_HORIZONTAL:
+            for(var = ini; var < fim; var++)
+                setPixel(img, posicao_fixa, var, cor);
+            break;
+        case 'v':
+        case TIPO_VERTICAL:
+            for(var = ini; var < fim; var++)
+                setPixel(img, var, posicao_fixa, cor);
+            break;
+        default:
+            printf("Erro na leitura!");
+            break;
+    }
 }
 
 
 void desenhaBorda(Imagem *img, float cor)
-	/*	Recebe uma imagem e uma cor. Desenha as bordas com a co nas
-		linhas 0 e nL-1 e nas colunas 0 e nC-1 da matriz da imagem. */
+    /*  Recebe uma imagem e uma cor. Desenha as bordas com a co nas
+        linhas 0 e nL-1 e nas colunas 0 e nC-1 da matriz da imagem. */
 {
-	int i;	/* Variável auxiliar */
-	
-	for(i = 0; i < img->nC; i++) {
-		/* Desenhando as linhas superior e inferior */
-		setPixel(img, 0, i, cor);
-		setPixel(img, img->nL-1, i, cor);
-	}	
-	
-	for(i = 0; i < img->nL; i++) {
-		/*Desenhando as colunas esquerda e direita */
-		setPixel(img, i, 0, cor);
-		setPixel(img, i, img->nC-1, cor);
-	}
+    int i;  /* Variável auxiliar */
+    
+    for(i = 0; i < img->nC; i++) {
+        /* Desenhando as linhas superior e inferior */
+        setPixel(img, 0, i, cor);
+        setPixel(img, img->nL-1, i, cor);
+    }   
+    
+    for(i = 0; i < img->nL; i++) {
+        /*Desenhando as colunas esquerda e direita */
+        setPixel(img, i, 0, cor);
+        setPixel(img, i, img->nC-1, cor);
+    }
 }
 
 
 int juntaPixels(Imagem *img, int x, int y, float corNova, CelPixel *cabeca)
-	/* 	A função juntaPixels recebe uma imagem e 2 posições. Captura re-
-		cursivamente todas as células com COR_FUNDO e as pinta com corNova.
-		Armazena a posição desse pixel numa lista encadeada iniciada por
-		'cabeça'. Retorna o total de pixels da região. */
-{	
-	/** ALOCAÇÃO DE VARIÁVEIS *****************************************/
-		int r; /*contador*/
-		CelPixel *nova;
-	
-	/** BASE DA RECURSÃO **********************************************/
-		if(getPixel(img, x, y) == corNova) return 0;
-		if(getPixel(img, x, y) == COR_BORDA) return 0;
-	
-	/** AÇÕES *********************************************************/
-		nova = mallocSafe(sizeof(CelPixel));
-		setPixel(img, x, y, corNova);
-		
-		nova->x = x;
-		nova->y = y;
-		nova->prox = cabeca->prox;
-		cabeca->prox = nova;
-		r=1; /* Conta a chamada recursiva atual para o total */
-	
-	/** NOVAS CHAMADAS RECURSIVAS *************************************/
-		r += juntaPixels(img, x+1, y, corNova, nova); /* direita	*/
-		r += juntaPixels(img, x, y+1, corNova, nova); /* baixo 		*/
-		r += juntaPixels(img, x-1, y, corNova, nova); /* esquerda	*/
-		r += juntaPixels(img, x, y-1, corNova, nova); /* cima 		*/
-		
-	return r;
+    /*  A função juntaPixels recebe uma imagem e 2 posições. Captura re-
+        cursivamente todas as células com COR_FUNDO e as pinta com corNova.
+        Armazena a posição desse pixel numa lista encadeada iniciada por
+        'cabeça'. Retorna o total de pixels da região. */
+{   
+    /** ALOCAÇÃO DE VARIÁVEIS *****************************************/
+        int r; /*contador*/
+        CelPixel *nova;
+    
+    /** BASE DA RECURSÃO **********************************************/
+        if(getPixel(img, x, y) == corNova) return 0;
+        if(getPixel(img, x, y) == COR_BORDA) return 0;
+    
+    /** AÇÕES *********************************************************/
+        nova = mallocSafe(sizeof(CelPixel));
+        setPixel(img, x, y, corNova);
+        
+        nova->x = x;
+        nova->y = y;
+        nova->prox = cabeca->prox;
+        cabeca->prox = nova;
+        r=1; /* Conta a chamada recursiva atual para o total */
+    
+    /** NOVAS CHAMADAS RECURSIVAS *************************************/
+        r += juntaPixels(img, x+1, y, corNova, nova); /* direita    */
+        r += juntaPixels(img, x, y+1, corNova, nova); /* baixo      */
+        r += juntaPixels(img, x-1, y, corNova, nova); /* esquerda   */
+        r += juntaPixels(img, x, y-1, corNova, nova); /* cima       */
+        
+    return r;
 }
 
 
 int  segmentaRegioes(Imagem *img, CelRegiao cabecas[MAX_REGIOES])
 {
-	int i, j;			
-	int ultima = 0;		
-	float corNova = 0.5;
-	
-	for(i = 0; i < img->nL; i++)
-	{
-		for(j = 0; j < img->nC; j++)
-		{
-			if(getPixel(img, i, j) == COR_FUNDO) 
-			{
-				cabecas[ultima].tamanho = juntaPixels(img, i, j, corNova,
-					&cabecas[ultima].cabpix);
-				ultima++;
-			}
-		}
-	}
-	
-	printf("\nGrupos de pixeis conexos:\n");
-	for(i = 0; i < ultima; i++)
-		printf("Grupo %3d tem %1d pixels\n", i, cabecas[i].tamanho);
-	
-	return ultima;
+    int i, j;           
+    int ultima = 0;     
+    float corNova = 0.5;
+    
+    for(i = 0; i < img->nL; i++)
+    {
+        for(j = 0; j < img->nC; j++)
+        {
+            if(getPixel(img, i, j) == COR_FUNDO) 
+            {
+                cabecas[ultima].tamanho = juntaPixels(img, i, j, corNova,
+                    &cabecas[ultima].cabpix);
+                ultima++;
+            }
+        }
+    }
+    
+    printf("\nGrupos de pixeis conexos:\n");
+    for(i = 0; i < ultima; i++)
+        printf("Grupo %3d tem %1d pixels\n", i, cabecas[i].tamanho);
+    
+    return ultima;
 }
 
 
 void pintaRegiao(CelPixel *cab, Imagem *R, Imagem *G, Imagem *B, 
-		 float cor[3])
-	/*	A função recebe uma lista encadeada de pixels que fazem parte
-		de uma subregião, três imagens (canais) e um vetor com as cores-
-		padrão. Para cada posição do pixel, colore cada cor corresponden-
-		te nas imagens R, G e B. */
+         float cor[3])
+    /*  A função recebe uma lista encadeada de pixels que fazem parte
+        de uma subregião, três imagens (canais) e um vetor com as cores-
+        padrão. Para cada posição do pixel, colore cada cor corresponden-
+        te nas imagens R, G e B. */
 {
-	int i, j;
-	CelPixel *pixel_atual;
-	pixel_atual = cab->prox;
-		
-	while(pixel_atual != NULL)
-	{
-		i = pixel_atual->x; j = pixel_atual->y;
-		
-		setPixel(R, i, j, cor[0]);
-		setPixel(G, i, j, cor[1]);
-		setPixel(B, i, j, cor[2]);
-		pixel_atual = pixel_atual->prox;
-	}
+    int i, j;
+    CelPixel *pixel_atual;
+    pixel_atual = cab->prox;
+        
+    while(pixel_atual != NULL)
+    {
+        i = pixel_atual->x; j = pixel_atual->y;
+        
+        setPixel(R, i, j, cor[0]);
+        setPixel(G, i, j, cor[1]);
+        setPixel(B, i, j, cor[2]);
+        pixel_atual = pixel_atual->prox;
+    }
 }
 
 
@@ -494,9 +494,9 @@ void salvaImagemRGB(char *nomeArquivo, Imagem *R, Imagem *G, Imagem *B)
   for (i = R->nL - 1; i>=0; i--)
     for (j = 0; j < R->nC; j++) 
       fprintf(fp, "%c%c%c", 
-	      (BYTE)(255*R->pixel[i][j]), 
-	      (BYTE)(255*G->pixel[i][j]), 
-	      (BYTE)(255*B->pixel[i][j]));
+          (BYTE)(255*R->pixel[i][j]), 
+          (BYTE)(255*G->pixel[i][j]), 
+          (BYTE)(255*B->pixel[i][j]));
 
   fprintf(stdout, "A imagem foi salva no arquivo: %s\n", nome);
   fclose(fp);
@@ -543,79 +543,79 @@ void leMondrian(char *nomeArquivo, int *altura, int *largura, Linha *cab)
       exit(-1);
     }
   fprintf(stdout, "Arquivo de entrada com a definicao do desenho: %s\n", 
-	  nomeArquivo);
+      nomeArquivo);
 
   while (fscanf(entrada, "%s", aux) != EOF) 
     {
       switch (aux[0]) {
       case '#':
-	fgets(aux, MAX_LINHA, entrada);
-	break;
+    fgets(aux, MAX_LINHA, entrada);
+    break;
 
       case 'r':
       case 'R':
-	npars = fscanf(entrada, "%d %d", altura, largura);
-	if (npars != 2) {
-	  fprintf(stderr, "ERRO na leitura da dimensao da"
-		  " imagem no arquivo de entrada %s\n", nomeArquivo);
-	  exit (-1);
-	}
-	else {
-	  fprintf(stdout, "Resolucao da Imagem: %d linhas x %d colunas \n",
-		  *altura, *largura);
-	}
-	break;
-	
+    npars = fscanf(entrada, "%d %d", altura, largura);
+    if (npars != 2) {
+      fprintf(stderr, "ERRO na leitura da dimensao da"
+          " imagem no arquivo de entrada %s\n", nomeArquivo);
+      exit (-1);
+    }
+    else {
+      fprintf(stdout, "Resolucao da Imagem: %d linhas x %d colunas \n",
+          *altura, *largura);
+    }
+    break;
+    
       case 'H':
       case 'h':
-	npars = fscanf(entrada, "%d %d %d", &p, &i, &f);
-	if (npars != 3) {
-	  fprintf(stderr, "ERRO na leitura de uma linha horizontal"
-		  " no arquivo de entrada %s\n", nomeArquivo);
-	  exit (-1);
-	}
-	else {
-	  cont += 1;
-	  nova = mallocSafe(sizeof(Linha));
-	  nova->prox = cab->prox;
-	  nova->tipo = TIPO_HORIZONTAL;
-	  nova->pos = p;
-	  nova->ini = i;
-	  nova->fim = f;
+    npars = fscanf(entrada, "%d %d %d", &p, &i, &f);
+    if (npars != 3) {
+      fprintf(stderr, "ERRO na leitura de uma linha horizontal"
+          " no arquivo de entrada %s\n", nomeArquivo);
+      exit (-1);
+    }
+    else {
+      cont += 1;
+      nova = mallocSafe(sizeof(Linha));
+      nova->prox = cab->prox;
+      nova->tipo = TIPO_HORIZONTAL;
+      nova->pos = p;
+      nova->ini = i;
+      nova->fim = f;
 
-	  cab->prox = nova;
-	  fprintf(stdout, "Linha %3d: Tipo H com pos = %4d, "
-		  "inicio = %4d e fim %4d\n", 
-		  cont, p, i, f);
-	}
-	break;
+      cab->prox = nova;
+      fprintf(stdout, "Linha %3d: Tipo H com pos = %4d, "
+          "inicio = %4d e fim %4d\n", 
+          cont, p, i, f);
+    }
+    break;
 
       case 'V':
       case 'v':
-	npars = fscanf(entrada, "%d %d %d", &p, &i, &f);
-	if (npars != 3) {
-	  fprintf(stderr, "ERRO na leitura de uma linha vertical no"
-		  " arquivo de entrada %s\n", nomeArquivo);
-	  exit (-1);
-	}
-	else {
-	  cont += 1;
-	  nova = mallocSafe(sizeof(Linha));
-	  nova->prox = cab->prox;
-	  nova->tipo = TIPO_VERTICAL;
-	  nova->pos = p;
-	  nova->ini = i;
-	  nova->fim = f;
+    npars = fscanf(entrada, "%d %d %d", &p, &i, &f);
+    if (npars != 3) {
+      fprintf(stderr, "ERRO na leitura de uma linha vertical no"
+          " arquivo de entrada %s\n", nomeArquivo);
+      exit (-1);
+    }
+    else {
+      cont += 1;
+      nova = mallocSafe(sizeof(Linha));
+      nova->prox = cab->prox;
+      nova->tipo = TIPO_VERTICAL;
+      nova->pos = p;
+      nova->ini = i;
+      nova->fim = f;
 
-	  cab->prox = nova;
-	  fprintf(stdout, "Linha %3d: Tipo V com pos = %4d, "
-		  "inicio = %4d e fim %4d\n", cont, p, i, f);
-	}
-	break;
+      cab->prox = nova;
+      fprintf(stdout, "Linha %3d: Tipo V com pos = %4d, "
+          "inicio = %4d e fim %4d\n", cont, p, i, f);
+    }
+    break;
 
       default:
-	fgets(aux, MAX_LINHA, entrada);
-	break;
+    fgets(aux, MAX_LINHA, entrada);
+    break;
       }
     }
   fclose(entrada);
