@@ -33,7 +33,7 @@ typedef struct lista {
 int  achaFilme(Lista *lista, Filme *f);
 void quickSort(Lista *lista);
 int  achaPalavra(unsigned char *pal, int tPal,
-		 unsigned char *texto, int tTexto);
+         unsigned char *texto, int tTexto);
 
 
 /* 

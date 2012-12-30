@@ -54,7 +54,7 @@
                              - insereFilme
                              - achaFilme
                              - quickSort
-		      */
+              */
 
 #include "iofilmes.h"  /* funcoes de entrada e saida:
                              - carregaLista  
@@ -65,7 +65,7 @@
 #include "utils.h"    /* funcoes de uso geral: 
                              - mallocSafe
                              - leString
-		      */
+              */
 
 /* 
 ////////////////////////////////////////////////////////////////////// 
@@ -107,67 +107,67 @@ char  leOpcao();
 */
 int main()
 {
-	char opcao;
-	Lista *lista = criaLista();
-	int ORDENADO = FALSE;
-		
-  	/* declaracao das demais variaveis do main */
-  	
-  	/* iterara ate o usuario digitar 'x' para sair */
-  	do { 
-		
+    char opcao;
+    Lista *lista = criaLista();
+    int ORDENADO = FALSE;
+        
+    /* declaracao das demais variaveis do main */
+    
+    /* iterara ate o usuario digitar 'x' para sair */
+    do { 
+        
       opcao = leOpcao();
       switch (opcao) {
-  	
+    
       case CARREGAR:
-      	carregaLista(lista);
-      	break;
+        carregaLista(lista);
+        break;
     
       case GRAVAR:
-      	gravaLista(lista);
-      	break;
+        gravaLista(lista);
+        break;
     
       case INSERIR:
-      	adicionaFilme(lista);
-    	break;
-    	
+        adicionaFilme(lista);
+        break;
+        
       case MOSTRAR:
-      	mostraLista(lista);
-      	break;
-		
-	  case ORDENAR:
-		ORDENADO = TRUE;
-		quickSort(lista);
-		break;
-		
-	  case PROCURAR:
-		buscaFilme(lista);
-		break;
-		
-	  case REMOVER:
-	  	removeFilme(lista);
-		break;
-		
-	  case MSTRMENOR:
-	  	if(ORDENADO == FALSE)
-	  		printf("Lista nao ordenada\n");
-	  	else
-	  		mostraTopMenores(lista);
-		break;
-		
-	  case MSTRMAIOR:
-	  	if(ORDENADO == FALSE)
-	  		printf("Lista nao ordenada\n");
-	  	else
-	  		mostraTopMaiores(lista);
-		break;
-		
+        mostraLista(lista);
+        break;
+        
+      case ORDENAR:
+        ORDENADO = TRUE;
+        quickSort(lista);
+        break;
+        
+      case PROCURAR:
+        buscaFilme(lista);
+        break;
+        
+      case REMOVER:
+        removeFilme(lista);
+        break;
+        
+      case MSTRMENOR:
+        if(ORDENADO == FALSE)
+            printf("Lista nao ordenada\n");
+        else
+            mostraTopMenores(lista);
+        break;
+        
+      case MSTRMAIOR:
+        if(ORDENADO == FALSE)
+            printf("Lista nao ordenada\n");
+        else
+            mostraTopMaiores(lista);
+        break;
+        
       case SAIR:
-      	break;
+        break;
     
       default :
-      	printf("\nOpcao '%c' nao reconhecida\n\n", opcao);
-      	break;
+        printf("\nOpcao '%c' nao reconhecida\n\n", opcao);
+        break;
     }
   } while (opcao != SAIR);
   
@@ -194,18 +194,18 @@ char leOpcao()
   char opcao;
 
   printf(
-	 "======================================================================\n"
-	 "  (c) Carregar um arquivo de dados\n"
-	 "  (g) Gravar a lista atual em um arquivo\n"
-	 "  (i) Inserir um filme\n"
-	 "  (m) Mostrar todos os filmes\n"
-	 "  (o) Ordenar a lista de filmes\n"
-	 "  (p) Procurar a nota de um filme\n"
-	 "  (r) Remover um filme\n"
-	 "  (t) Mostrar N filmes com nota menor que X e pelo menos V votos\n"
-	 "  (u) Mostrar N filmes com nota maior que X e pelo menos V votos\n"
-	 "  (x) Sair do programa\n\n"
-	 );
+     "======================================================================\n"
+     "  (c) Carregar um arquivo de dados\n"
+     "  (g) Gravar a lista atual em um arquivo\n"
+     "  (i) Inserir um filme\n"
+     "  (m) Mostrar todos os filmes\n"
+     "  (o) Ordenar a lista de filmes\n"
+     "  (p) Procurar a nota de um filme\n"
+     "  (r) Remover um filme\n"
+     "  (t) Mostrar N filmes com nota menor que X e pelo menos V votos\n"
+     "  (u) Mostrar N filmes com nota maior que X e pelo menos V votos\n"
+     "  (x) Sair do programa\n\n"
+     );
   printf("Digite uma opcao: ");
   scanf(" %c", &opcao);
   
